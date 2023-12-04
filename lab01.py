@@ -2,10 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np  
 import random
 from scipy.interpolate import lagrange 
-
-
-def func(x: float):
-    return np.arccos(x)
+from helper import print_funcan, f
 
 
 def interpolation_lagrange(init_args: list[float], init_values: list[float], interpol_args: list[float]) -> list[float]:
@@ -28,7 +25,7 @@ def task_1(init_args=[]) -> None:
     if len(init_args) == 0:
         init_args = [-0.963, -0.12, 0.67, 1]
     # build init values
-    init_values = [func(v) for v in init_args] 
+    init_values = [f(v) for v in init_args] 
 
     h = 0.01
     x = np.arange(-1, 1, h) 
@@ -36,12 +33,12 @@ def task_1(init_args=[]) -> None:
 
     # numerical-analytical relative error 
     dev = 0
-    max_y = max([abs(func(x0)) for x0 in x])
+    max_y = max([abs(f(x0)) for x0 in x])
     for i in range(len(x)):
-        dev = max(dev, abs(func(x[i]) - y[i]) / max_y)
+        dev = max(dev, abs(f(x[i]) - y[i]) / max_y)
     print(round(dev, 3))
 
-    print_func(x, y)
+    print_funcan(x, y)
     
 
 def task_2() -> None:
@@ -57,12 +54,12 @@ def task_3(h) -> float:
         init_args.append(x)
         x += 0.3
     dev = 0
-    init_values = [func(v) for v in init_args]
+    init_values = [f(v) for v in init_args]
     x = np.linspace(min(init_args), max(init_args), 10)
     y = interpolation_lagrange(init_args, init_values, x)
-    max_y = max([abs(func(x0)) for x0 in x])
+    max_y = max([abs(f(x0)) for x0 in x])
     for i in range(len(x)):
-        dev = max(dev, abs(func(x[i]) - y[i]) / max_y)
+        dev = max(dev, abs(f(x[i]) - y[i]) / max_y)
 
     print(round(dev, 3))
 
@@ -72,21 +69,6 @@ def main():
     task_1()
     task_2()
     task_3(0.1)
-
-    #init_args = np.array(a)
-    #poly = lagrange(init_args, func(init_args))
-    #x = np.arange(min(init_args) - 1, max(init_args) + 1, 0.1)
-    #y = [poly(v) for v in x]
-#
-    #dev = 0
-    #max_y = max([abs(func(x0)) for x0 in x])
-    #for i in range(len(x)):
-    #    dev = max(dev, abs(func(x[i]) - y[i]) / max_y)
-    #print(round(dev, 3))
-#
-    #print_func(x, y)
-
-
 
 
 if __name__ == "__main__":
