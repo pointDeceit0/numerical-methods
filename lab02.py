@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np  
 import math
-from lab01 import print_func, interpolation_lagrange
+from lab01 import interpolation_lagrange
 
 
 def func(x: float): # initial function

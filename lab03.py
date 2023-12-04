@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np  
 import math
 from lab02 import divdif, find_w
-from lab01 import print_func
+from helper import print_func
 
 
 def f(x):
