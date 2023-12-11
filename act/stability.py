@@ -46,7 +46,7 @@ def mcriterion(w: list[float], root_number: int, f: str) -> tuple[list[float], l
 
 
 def main():
-    with open("idata.txt", "r", encoding="utf-8") as file:
+    with open("act/idata.txt", "r", encoding="utf-8") as file:
         # task number: number, equation, number of roots
         tasks = {}
         cur_task = ""
