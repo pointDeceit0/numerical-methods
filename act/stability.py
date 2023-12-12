@@ -16,7 +16,7 @@ def mcriterion(w: list[float], root_number: int, f: str) -> tuple[list[float], l
     """
     
     re, im = [0] * len(w), [0] * len(w)
-    q = -1 # quadrant
+    q = -2 # quadrant
     count = 0 
     for i, w0 in enumerate(w):
         x = complex(0, w0)
@@ -25,22 +25,15 @@ def mcriterion(w: list[float], root_number: int, f: str) -> tuple[list[float], l
         im[i] = v.imag
         
         # defines if curve wasn't in quadrant 
-        if v.real > 0 and v.imag > 0: # 1
-            if q != 0:
-                count += 1
-                q = 0  
-        elif v.real < 0 and v.imag > 0: # 2
-            if q != 1:
-                count += 1
-                q = 1
-        elif v.real < 0 and v.imag < 0: # 3
-            if q != 2:
-                count += 1
-                q = 2
-        elif v.real > 0 and v.imag < 0: # 4
-            if q != 3:
-                count += 1
-                q = 3
+        temp = 1 * (v.real > 0 and v.imag > 0) + \
+               2 * (v.real < 0 and v.imag > 0) + \
+               3 * (v.real < 0 and v.imag < 0) + \
+               4 * (v.real > 0 and v.imag < 0)
+        # initial case q = -2 provides inimplementaion -1 + 1 == temp = 0 (because it happens)
+        # provides consistent passage of quadrants counterclock, started from any
+        if q + 1 == temp or q == -2 and temp != 0:
+            count += 1
+            q = temp
 
     return re, im, count == root_number
 
