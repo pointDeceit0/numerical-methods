@@ -13,16 +13,21 @@ init_values_1 = [f(x) for x in init_args_1]
 init_values_2 = [f(x) for x in init_args_2]
 
 
-def print_funcan(x: list[float], y: list[float], func=f) -> None:
+def print_funcan(x: list[float], *y: list[list[float]], names: list[str], func=f) -> None:
     """
     Prints analytical and numerical plots 
 
     Analytical builds with inition function
     """
 
-    plt.plot(x, y, linewidth=4)   # numerical
+    for g in y:
+        print(g)
+        print(y)
+        plt.plot(x, g, linewidth=4)   # numerical
     plt.plot(x, func(x)) # analytical
-    plt.legend(["numerical", "analytical"])
+    if names:
+        names.append("Analytical")
+        plt.legend(names)
 
     plt.grid(axis="both")
     # axes
