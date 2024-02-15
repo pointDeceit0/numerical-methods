@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from numpy import arccos
+from numpy import arccos, log10, ceil
 
 def f(x):
     return arccos(x)
@@ -75,3 +75,14 @@ def wn(init_args: list[float], x0: float) -> float:
     for x in init_args:
         wn *= abs(x0 - x)
     return wn
+
+
+def round_to(x: float, k=2) -> float:
+    """
+    Rounds to kth significant number
+
+    """
+    if x > 1:
+        return round(x, 2)
+    
+    return round(x, abs(int(ceil(log10(x)))) + k)
