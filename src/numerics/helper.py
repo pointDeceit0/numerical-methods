@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from numpy import arccos, log10, ceil
+from numpy import arccos, log10, ceil, meshgrid
 
 def f(x):
     return arccos(x)
@@ -58,6 +58,27 @@ def print_graphs(x: list[float], *y: list[list[float]], names=None, func=f) -> N
     ax.spines['right'].set_visible(False)
     ax.set_xlabel("x", loc="right")
     ax.set_ylabel("y", loc="top")
+
+
+def print_3d_funcan(x: list[float], y: list[float], u: list[list[float]], u_an: list[list[float]], name=None) -> None:
+    X, Y = meshgrid(x, y)
+
+    fig = plt.figure(figsize=(10, 7))
+    ax = fig.add_subplot(1, 2, 1, projection='3d')
+    ax.plot_surface(X, Y, u, cmap='viridis')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('u(x, y)')
+    ax.set_title('Laplace equation solution (numerical)')
+
+    ax = fig.add_subplot(1, 2, 2, projection='3d')
+    ax.plot_surface(X, Y, u_an, cmap='viridis')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('u(x, y)')
+    ax.set_title('Laplace equation solution (analytical)')
+
+    plt.show()
 
 
 
